@@ -1,6 +1,7 @@
 import TWEEN from "@tweenjs/tween.js";
 import * as PIXI from 'pixi.js';
 import {Base} from "./base";
+import {Ledge} from "./ledge";
 
 export class Game extends Base{
     constructor() {
@@ -22,6 +23,10 @@ export class Game extends Base{
         sprite.x = 100;
         sprite.y = 20;
         this.cnt.game.addChild(sprite);
+
+        let testLedge = new Ledge(400, 250, 300, 50, 10, this);
+        testLedge.show();
+
     }
 
 }

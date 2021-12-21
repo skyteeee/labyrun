@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js';
+import Matter from 'matter-js';
 
 export class Base {
     constructor() {
@@ -7,16 +8,26 @@ export class Base {
         this.width = 0;
         this.cnt = {};
         this.tex = null;
-        this.animateObjects = [];
+        this.animatedObjects = [];
         this.lastTime = null;
         this.delayed = [];
     }
 
     refresh(time) {
+        this.updatePhysics(time);
         this.animate(time);
         if (this.decideToRefresh()) {
-            requestAnimationFrame((time1 => this.refresh(time1)));
+            requestAnimationFrame((time1) => {this.refresh(time1)});
         }
+    }
+
+    updatePhysics(time) {
+        const delta = 16.666;
+        let timePassed = delta;
+        if (this.lastTime && time > this.lastTime) {
+            timePassed = time - this.lastTime;
+        }
+        Matter.Engine.update(this.phEngine, delta, delta/timePassed);
     }
 
     animate(time) {
@@ -26,7 +37,7 @@ export class Base {
         let elapsed = (time - this.lastTime) * 0.001;
         this.lastTime = time;
         TWEEN.update(time);
-        for (let object of this.animateObjects) {
+        for (let object of this.animatedObjects) {
             object.update(elapsed);
         }
         if (Object.keys(TWEEN._tweens).length === 0 && this.delayed.length > 0) {
@@ -48,14 +59,14 @@ export class Base {
     }
 
     addAnimatedObject(object) {
-        this.animateObjects.push(object);
+        this.animatedObjects.push(object);
     }
 
     removeAnimatedObject(object) {
-        for (let index in this.animateObjects) {
-            let element = this.animateObjects[index];
+        for (let index in this.animatedObjects) {
+            let element = this.animatedObjects[index];
             if (element === object) {
-                this.animateObjects.splice(index, 1);
+                this.animatedObjects.splice(index, 1);
                 break;
             }
         }
@@ -71,6 +82,9 @@ export class Base {
         this.version = versionElem.innerText.split(' ')[0];
         this.height = div.offsetHeight;
         this.width = div.offsetWidth;
+
+        this.phEngine = Matter.Engine.create();
+
 
         this.app = new PIXI.Application({
             width: this.width, height: this.height,
@@ -100,6 +114,7 @@ export class Base {
         div.appendChild(this.app.view);
         this.tex = {allImg: this.app.loader.resources['img/gameAtlas.json'].textures};
         this.tex.character = this.tex.allImg["ball_lblue.png"];
+        this.tex.ledge = this.tex.allImg["ledge-1.png"];
     }
 
 }

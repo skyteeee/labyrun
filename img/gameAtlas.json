@@ -7,14 +7,24 @@
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":100,"h":100},
 	"sourceSize": {"w":100,"h":100}
+},
+"ledge-1.png":
+{
+	"frame": {"x":100,"y":0,"w":128,"h":128},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":128,"h":128},
+	"sourceSize": {"w":128,"h":128}
 }},
+"animations": {
+},
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "gameAtlas.png",
 	"format": "RGBA8888",
-	"size": {"w":100,"h":100},
+	"size": {"w":228,"h":128},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:91c973b57b814805a870702770ddc0bf:f58453b18740caea76895193e0506ddf:ea05c72325e7fc7c6bd0bc9070e6c63c$"
+	"smartupdate": "$TexturePacker:SmartUpdate:6c584c1a0d9bae2b98a16c89c2bc3515:5086a385de3ef5a842e5ccb038bdce92:ea05c72325e7fc7c6bd0bc9070e6c63c$"
 }
 }
