@@ -196,6 +196,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">raw_img/bricks-1.png</key>
             <key type="filename">raw_img/ledge-1.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -216,6 +217,7 @@
         <array>
             <filename>raw_img/ball_lblue.png</filename>
             <filename>raw_img/ledge-1.png</filename>
+            <filename>raw_img/bricks-1.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

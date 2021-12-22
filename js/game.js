@@ -1,12 +1,14 @@
 import TWEEN from "@tweenjs/tween.js";
 import * as PIXI from 'pixi.js';
+import Matter from "matter-js";
 import {Base} from "./base";
 import {Ledge} from "./ledge";
+import {Ball} from "./ball";
+import {keyboard} from "./utils";
 
 export class Game extends Base{
     constructor() {
         super();
-
     }
 
     init() {
@@ -19,13 +21,17 @@ export class Game extends Base{
     }
 
     initGame() {
-        let sprite = new PIXI.Sprite(this.tex.character);
-        sprite.x = 100;
-        sprite.y = 20;
-        this.cnt.game.addChild(sprite);
+        let ball = new Ball(300, 100, 25, this);
+        ball.show();
 
-        let testLedge = new Ledge(400, 250, 300, 50, 10, this);
+        let testLedge = new Ledge(200, 250, 300, 48, 10, this);
         testLedge.show();
+
+        let ground = new Ledge(0, 590, 1000, 10, 0, this);
+        ground.show();
+
+        let leftObject = keyboard("ArrowLeft");
+        leftObject.press = () => {console.log("Left pressed!")};
 
     }
 

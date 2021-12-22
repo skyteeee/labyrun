@@ -84,7 +84,8 @@ export class Base {
         this.width = div.offsetWidth;
 
         this.phEngine = Matter.Engine.create();
-
+        this.abstractX = 1000;
+        this.abstractY = 600;
 
         this.app = new PIXI.Application({
             width: this.width, height: this.height,
@@ -109,12 +110,32 @@ export class Base {
             });
     }
 
+    abstractToReal(x, y) {
+        let scaleX = this.width / this.abstractX;
+        let scaleY = this.height / this.abstractY;
+        let newX = x * scaleX;
+        let newY = y * scaleY;
+        return {x: newX, y: newY};
+    }
+
+    calculateCorner(centerX, centerY, width, height) {
+        let cornerX = centerX - 0.5 * width;
+        let cornerY = centerY - 0.5 * height;
+        return {x: cornerX, y: cornerY};
+    }
+
+    calculateCenter(cornerX, cornerY, width, height) {
+        let centerX = cornerX + 0.5 * width;
+        let centerY = cornerY + 0.5 * height;
+        return {x: centerX, y: centerY};
+    }
+
     setupResources() {
         let div = document.getElementById('fieldHolder');
         div.appendChild(this.app.view);
         this.tex = {allImg: this.app.loader.resources['img/gameAtlas.json'].textures};
         this.tex.character = this.tex.allImg["ball_lblue.png"];
-        this.tex.ledge = this.tex.allImg["ledge-1.png"];
+        this.tex.ledge = this.tex.allImg["bricks-1.png"];
     }
 
 }

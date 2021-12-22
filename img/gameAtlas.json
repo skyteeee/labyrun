@@ -2,15 +2,23 @@
 
 "ball_lblue.png":
 {
-	"frame": {"x":0,"y":0,"w":100,"h":100},
+	"frame": {"x":0,"y":0,"w":94,"h":94},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":100,"h":100},
-	"sourceSize": {"w":100,"h":100}
+	"spriteSourceSize": {"x":0,"y":0,"w":94,"h":94},
+	"sourceSize": {"w":94,"h":94}
+},
+"bricks-1.png":
+{
+	"frame": {"x":94,"y":0,"w":128,"h":128},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":128,"h":128},
+	"sourceSize": {"w":128,"h":128}
 },
 "ledge-1.png":
 {
-	"frame": {"x":100,"y":0,"w":128,"h":128},
+	"frame": {"x":222,"y":0,"w":128,"h":128},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":128,"h":128},
@@ -23,8 +31,8 @@
 	"version": "1.0",
 	"image": "gameAtlas.png",
 	"format": "RGBA8888",
-	"size": {"w":228,"h":128},
+	"size": {"w":350,"h":128},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:6c584c1a0d9bae2b98a16c89c2bc3515:5086a385de3ef5a842e5ccb038bdce92:ea05c72325e7fc7c6bd0bc9070e6c63c$"
+	"smartupdate": "$TexturePacker:SmartUpdate:a6368a75508ab27756048d36345ae9d1:2f258f7517fa1639edd682f7cdd55574:ea05c72325e7fc7c6bd0bc9070e6c63c$"
 }
 }
