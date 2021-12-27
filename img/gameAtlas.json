@@ -1,6 +1,6 @@
 {"frames": {
 
-"ball_lblue.png":
+"ball_green.png":
 {
 	"frame": {"x":0,"y":0,"w":94,"h":94},
 	"rotated": false,
@@ -8,9 +8,49 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":94,"h":94},
 	"sourceSize": {"w":94,"h":94}
 },
+"ball_lblue.png":
+{
+	"frame": {"x":0,"y":94,"w":94,"h":94},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":94,"h":94},
+	"sourceSize": {"w":94,"h":94}
+},
+"bouncer.png":
+{
+	"frame": {"x":0,"y":188,"w":128,"h":128},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":128,"h":128},
+	"sourceSize": {"w":128,"h":128}
+},
 "bricks-1.png":
 {
-	"frame": {"x":94,"y":0,"w":128,"h":128},
+	"frame": {"x":0,"y":316,"w":128,"h":128},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":128,"h":128},
+	"sourceSize": {"w":128,"h":128}
+},
+"bridge_1.png":
+{
+	"frame": {"x":0,"y":444,"w":128,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":128,"h":32},
+	"sourceSize": {"w":128,"h":32}
+},
+"bridge_2.png":
+{
+	"frame": {"x":0,"y":476,"w":64,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
+	"sourceSize": {"w":64,"h":64}
+},
+"ice.png":
+{
+	"frame": {"x":0,"y":540,"w":128,"h":128},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":128,"h":128},
@@ -18,21 +58,22 @@
 },
 "ledge-1.png":
 {
-	"frame": {"x":222,"y":0,"w":128,"h":128},
+	"frame": {"x":0,"y":668,"w":128,"h":128},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":128,"h":128},
 	"sourceSize": {"w":128,"h":128}
 }},
 "animations": {
+	"bridge": ["bridge_1.png","bridge_2.png"]
 },
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "gameAtlas.png",
 	"format": "RGBA8888",
-	"size": {"w":350,"h":128},
+	"size": {"w":128,"h":796},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:a6368a75508ab27756048d36345ae9d1:2f258f7517fa1639edd682f7cdd55574:ea05c72325e7fc7c6bd0bc9070e6c63c$"
+	"smartupdate": "$TexturePacker:SmartUpdate:5ab77c220e63929e5855104ac72f0f2e:246ec295d81d441e7b4e577a0a759e0c:ea05c72325e7fc7c6bd0bc9070e6c63c$"
 }
 }

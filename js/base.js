@@ -136,6 +136,10 @@ export class Base {
         this.tex = {allImg: this.app.loader.resources['img/gameAtlas.json'].textures};
         this.tex.character = this.tex.allImg["ball_lblue.png"];
         this.tex.ledge = this.tex.allImg["bricks-1.png"];
+        this.tex.greenCharacter = this.tex.allImg["ball_green.png"];
+        this.tex.ice = this.tex.allImg["ice.png"];
+        this.tex.bouncer = this.tex.allImg["bouncer.png"];
+        this.tex.bridgePiece = this.tex.allImg["bridge_1.png"];
     }
 
 }

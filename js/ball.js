@@ -3,13 +3,14 @@ import Matter from "matter-js";
 import * as PIXI from "pixi.js";
 
 export class Ball extends GameObject {
-    constructor(centerX, centerY, radius, game) {
+    constructor(centerX, centerY, radius, game, texture) {
         let realCoords = game.abstractToReal(centerX, centerY);
         let realScale = game.abstractToReal(radius, radius);
-        super(Matter.Bodies.circle(realCoords.x, realCoords.y, realScale.x, { isStatic: false }));
+        super(Matter.Bodies.circle(realCoords.x, realCoords.y, realScale.x, { isStatic: false, restitution: 0.5 }));
         this.game = game;
+        Matter.Body.setMass(this.body, 10);
         this.radius = realScale.x;
-        this.sprite = new PIXI.Sprite(game.tex.character);
+        this.sprite = new PIXI.Sprite(texture);
         this.sprite.height = this.radius * 2;
         this.sprite.width = this.radius * 2;
     }

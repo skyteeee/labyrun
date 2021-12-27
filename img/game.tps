@@ -181,6 +181,7 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">raw_img/ball_green.png</key>
             <key type="filename">raw_img/ball_lblue.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -196,7 +197,9 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">raw_img/bouncer.png</key>
             <key type="filename">raw_img/bricks-1.png</key>
+            <key type="filename">raw_img/ice.png</key>
             <key type="filename">raw_img/ledge-1.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -212,12 +215,47 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">raw_img/bridge_1.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>32,8,64,16</rect>
+                <key>scale9Paddings</key>
+                <rect>32,8,64,16</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">raw_img/bridge_2.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>16,16,32,32</rect>
+                <key>scale9Paddings</key>
+                <rect>16,16,32,32</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
         </map>
         <key>fileList</key>
         <array>
             <filename>raw_img/ball_lblue.png</filename>
             <filename>raw_img/ledge-1.png</filename>
             <filename>raw_img/bricks-1.png</filename>
+            <filename>raw_img/ball_green.png</filename>
+            <filename>raw_img/ice.png</filename>
+            <filename>raw_img/bouncer.png</filename>
+            <filename>raw_img/bridge_1.png</filename>
+            <filename>raw_img/bridge_2.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
