@@ -1,11 +1,12 @@
 import {BridgePiece} from "./bridgePiece";
 import Matter from "matter-js";
+import {findDistance} from "./utils";
 
 export class Bridge{
     constructor(x1, y1, x2, y2, pieceHeight, linkAmount, game, angle) {
         let realCoords1 = game.abstractToReal(x1, y1);
         let realCoords2 = game.abstractToReal(x2, y2);
-        let pieceWidth = Math.sqrt((realCoords2.x - realCoords1.x)**2 + (realCoords2.y - realCoords1.y)**2 ) / linkAmount + 5;
+        let pieceWidth =  findDistance(realCoords1.x, realCoords1.y, realCoords2.x, realCoords2.y) / linkAmount + 5;
         this.game = game;
         this.bodies = [];
         this.group = Matter.Body.nextGroup(true);

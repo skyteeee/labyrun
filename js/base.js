@@ -1,11 +1,14 @@
 import * as PIXI from 'pixi.js';
+import {Viewport} from "pixi-viewport";
 import Matter from 'matter-js';
+import {findDistance} from "./utils";
 
 export class Base {
     constructor() {
         this.app = null;
         this.height = 0;
         this.width = 0;
+        this.windowDiagonal = 0;
         this.cnt = {};
         this.tex = null;
         this.animatedObjects = [];
@@ -16,10 +19,13 @@ export class Base {
     refresh(time) {
         this.updatePhysics(time);
         this.animate(time);
+        this.updateViewport();
         if (this.decideToRefresh()) {
             requestAnimationFrame((time1) => {this.refresh(time1)});
         }
     }
+
+    updateViewport() {}
 
     updatePhysics(time) {
         const delta = 16.666;
@@ -84,20 +90,32 @@ export class Base {
         this.width = div.offsetWidth;
 
         this.phEngine = Matter.Engine.create();
-        this.abstractX = 1000;
-        this.abstractY = 600;
 
         this.app = new PIXI.Application({
             width: this.width, height: this.height,
             antialias: true, backgroundColor: 0xeaeae4, resolution: window.devicePixelRatio || 1
         });
+
+        this.viewport = new Viewport({
+            screenWidth: this.width,
+            screenHeight: this.height,
+            worldWidth: 2000,
+            worldHeight: 600
+        });
+
+        this.windowDiagonal = findDistance(0, 0, this.width, this.height);
+
+        this.viewport.decelerate({friction:0.95});
+        this.viewport.clamp({direction: "all"});
+
         PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.LINEAR;
 
         this.cnt.field = new PIXI.Container();
         this.cnt.background = new PIXI.Container();
         this.cnt.game = new PIXI.Container();
 
-        this.app.stage.addChild(this.cnt.field);
+        this.app.stage.addChild(this.viewport);
+        this.viewport.addChild(this.cnt.field);
         this.cnt.field.addChild(this.cnt.background);
         this.cnt.field.addChild(this.cnt.game);
 
@@ -111,11 +129,7 @@ export class Base {
     }
 
     abstractToReal(x, y) {
-        let scaleX = this.width / this.abstractX;
-        let scaleY = this.height / this.abstractY;
-        let newX = x * scaleX;
-        let newY = y * scaleY;
-        return {x: newX, y: newY};
+        return {x: x, y: y};
     }
 
     calculateCorner(centerX, centerY, width, height) {
