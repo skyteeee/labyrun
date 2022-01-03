@@ -1,35 +1,54 @@
 import {GameObject} from "./gameObject";
 import Matter from "matter-js";
 import * as PIXI from "pixi.js";
+import {SpriteObject} from "./spriteObject";
 
-export class Ball extends GameObject {
+export class Ball extends SpriteObject {
     constructor(centerX, centerY, radius, game, texture) {
-        let realCoords = game.abstractToReal(centerX, centerY);
-        let realScale = game.abstractToReal(radius, radius);
-        super(Matter.Bodies.circle(realCoords.x, realCoords.y, realScale.x, { isStatic: false, restitution: 0.5 }));
-        this.game = game;
-        Matter.Body.setMass(this.body, 10);
-        this.radius = realScale.x;
-        this.sprite = new PIXI.Sprite(texture);
-        this.sprite.height = this.radius * 2;
-        this.sprite.width = this.radius * 2;
+        super(radius * 2, radius * 2, texture, Matter.Bodies.circle(centerX, centerY, radius, { isStatic: false, restitution: 0.5, mass: 10 }), game);
+        this.moving = 0;
+        this.jumps = 2;
+        this.movingForce = 0.009;
+        this.pushForce = 0.15;
+        this.yForce = -0.25;
     }
+
+    startMovement(direction) {
+        Matter.Body.applyForce(this.body, this.body.position, {x: this.pushForce * direction, y: 0});
+        this.moving = direction;
+    }
+
+    stopMovement(direction) {
+        if (this.moving === direction) {
+            this.moving = 0;
+        }
+    }
+
+    move() {
+        if (this.moving) {
+            Matter.Body.applyForce(this.body, this.body.position, {x: this.movingForce * this.moving, y: 0});
+        }
+    }
+
+    jump() {
+        if ( Math.abs(this.body.velocity.y) < this.game.maxSpeed && this.jumps) {
+            Matter.Body.applyForce(this.body, this.body.position, {x: 0, y: this.yForce});
+            this.jumps --;
+        }
+    }
+
+    collisionStart(withBody) {
+        this.resetJumps();
+    }
+
+    resetJumps() {
+        this.jumps = 2;
+    }
+
 
     update() {
-        let cornerCoords = this.game.calculateCorner(this.body.position.x, this.body.position.y, 2 * this.radius, 2 * this.radius);
-        this.sprite.x = cornerCoords.x;
-        this.sprite.y = cornerCoords.y;
-    }
-
-    show() {
-       this.game.cnt.game.addChild(this.sprite);
-       this.game.addAnimatedObject(this);
-       Matter.Composite.add(this.game.phEngine.world, this.body);
-    }
-
-    hide() {
-        this.game.cnt.game.removeChild(this.sprite);
-        this.game.removeAnimatedObject(this);
+        super.update();
+        this.move();
     }
 
 }

@@ -57,6 +57,7 @@ export class Ledge extends GameObject{
     hide() {
         this.game.cnt.game.removeChild(this.sprite);
         this.game.removeAnimatedObject(this);
+        Matter.Composite.remove(this.game.phEngine.world, this.body);
     }
 
 }

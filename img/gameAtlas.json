@@ -2,7 +2,7 @@
 
 "ball_green.png":
 {
-	"frame": {"x":0,"y":0,"w":94,"h":94},
+	"frame": {"x":0,"y":64,"w":94,"h":94},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":94,"h":94},
@@ -10,7 +10,7 @@
 },
 "ball_lblue.png":
 {
-	"frame": {"x":0,"y":94,"w":94,"h":94},
+	"frame": {"x":0,"y":158,"w":94,"h":94},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":94,"h":94},
@@ -18,7 +18,7 @@
 },
 "bouncer.png":
 {
-	"frame": {"x":0,"y":188,"w":128,"h":128},
+	"frame": {"x":0,"y":252,"w":128,"h":128},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":128,"h":128},
@@ -26,7 +26,7 @@
 },
 "bricks-1.png":
 {
-	"frame": {"x":0,"y":316,"w":128,"h":128},
+	"frame": {"x":0,"y":380,"w":128,"h":128},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":128,"h":128},
@@ -34,7 +34,7 @@
 },
 "bridge_1.png":
 {
-	"frame": {"x":0,"y":444,"w":128,"h":32},
+	"frame": {"x":0,"y":508,"w":128,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":128,"h":32},
@@ -42,7 +42,7 @@
 },
 "bridge_2.png":
 {
-	"frame": {"x":0,"y":476,"w":64,"h":64},
+	"frame": {"x":50,"y":0,"w":64,"h":64},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
@@ -63,6 +63,14 @@
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":128,"h":128},
 	"sourceSize": {"w":128,"h":128}
+},
+"speedBooster.png":
+{
+	"frame": {"x":0,"y":0,"w":50,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
+	"sourceSize": {"w":50,"h":50}
 }},
 "animations": {
 	"bridge": ["bridge_1.png","bridge_2.png"]
@@ -74,6 +82,6 @@
 	"format": "RGBA8888",
 	"size": {"w":128,"h":796},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:5ab77c220e63929e5855104ac72f0f2e:246ec295d81d441e7b4e577a0a759e0c:ea05c72325e7fc7c6bd0bc9070e6c63c$"
+	"smartupdate": "$TexturePacker:SmartUpdate:329507872c52ca18fb59b75ad7017a2e:18e7b9ea3c484b9feeb7470a96afb9b3:ea05c72325e7fc7c6bd0bc9070e6c63c$"
 }
 }

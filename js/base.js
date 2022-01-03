@@ -82,6 +82,10 @@ export class Base {
         return true;
     }
 
+    onCollisionStart(pairs) {
+
+    }
+
     initEngine() {
         let div = document.getElementById('fieldHolder');
         let versionElem = document.getElementById('version');
@@ -90,6 +94,10 @@ export class Base {
         this.width = div.offsetWidth;
 
         this.phEngine = Matter.Engine.create();
+
+        Matter.Events.on(this.phEngine, "collisionStart", (pairs) => {
+            this.onCollisionStart(pairs);
+        });
 
         this.app = new PIXI.Application({
             width: this.width, height: this.height,
@@ -154,6 +162,7 @@ export class Base {
         this.tex.ice = this.tex.allImg["ice.png"];
         this.tex.bouncer = this.tex.allImg["bouncer.png"];
         this.tex.bridgePiece = this.tex.allImg["bridge_1.png"];
+        this.tex.speedBooster = this.tex.allImg["speedBooster.png"];
     }
 
 }

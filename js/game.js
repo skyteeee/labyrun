@@ -3,6 +3,7 @@ import * as PIXI from 'pixi.js';
 import Matter from "matter-js";
 import {Base} from "./base";
 import {Ledge} from "./ledge";
+import {SpeedBooster} from "./speedBooster";
 import {Ball} from "./ball";
 import {keyboard, findDistance} from "./utils";
 import {Bridge} from "./bridge";
@@ -12,10 +13,8 @@ export class Game extends Base{
         super();
         this.maxSpeed = 2;
         this.lastScale = 1;
-        this.xForce = 0.175;
         this.scaleAnimationObject = {value: 1};
         this.currentScaleAnimation = null;
-        this.yForce = -0.25;
         this.characters = {
             blueBall: null,
             greenBall: null
@@ -46,6 +45,24 @@ export class Game extends Base{
         }
     }
 
+    onCollisionStart(event) {
+        for (let pair of event.pairs) {
+            if (pair.bodyA.id === this.characters.blueBall.body.id) {
+                this.characters.blueBall.collisionStart(pair.bodyB);
+            }
+            if (pair.bodyB.id === this.characters.blueBall.body.id) {
+                this.characters.blueBall.collisionStart(pair.bodyA);
+            }
+            if (pair.bodyA.id === this.characters.greenBall.body.id) {
+                this.characters.greenBall.collisionStart(pair.bodyB);
+            }
+            if (pair.bodyB.id === this.characters.greenBall.body.id) {
+                this.characters.greenBall.collisionStart(pair.bodyA);
+            }
+
+        }
+    }
+
     startZoomUpdate(from, to) {
         if (this.currentScaleAnimation) {
             this.currentScaleAnimation.stop();
@@ -65,16 +82,6 @@ export class Game extends Base{
     setupResources() {
         super.setupResources();
         this.initGame();
-    }
-
-    moveBall(direction, body, force) {
-        if (direction === 1) {
-            Matter.Body.applyForce(body, body.position, {x: force, y: 0});
-        } else  {
-            if ( Math.abs(body.velocity.y) < this.maxSpeed) {
-                Matter.Body.applyForce(body, body.position, {x: 0, y: force});
-            }
-        }
     }
 
     initWalls() {
@@ -106,6 +113,9 @@ export class Game extends Base{
         let bridge = new Bridge(100, 300, 300, 200, 20, 10, this);
         bridge.show();
 
+        let speedBooster = new SpeedBooster(500, 70, this);
+        speedBooster.show();
+
     }
 
     initCharacters() {
@@ -123,32 +133,71 @@ export class Game extends Base{
     initControls() {
         let leftObject = keyboard("ArrowLeft");
         leftObject.press = () => {
-            this.moveBall(1, this.characters.blueBall.body, -this.xForce);
+            this.characters.blueBall.startMovement(-1);
+        };
+
+        leftObject.release = () => {
+            this.characters.blueBall.stopMovement(-1);
         };
 
         let rightObject = keyboard("ArrowRight");
         rightObject.press = () => {
-            this.moveBall(1, this.characters.blueBall.body, this.xForce);
+            this.characters.blueBall.startMovement(1);
+        };
+
+        rightObject.release = () => {
+            this.characters.blueBall.stopMovement(1);
         };
 
         let upObject = keyboard("ArrowUp");
         upObject.press = () => {
-            this.moveBall(0, this.characters.blueBall.body, this.yForce);
+            this.characters.blueBall.jump();
         };
 
         let aObject = keyboard("a");
         aObject.press = () => {
-            this.moveBall(1, this.characters.greenBall.body, -this.xForce);
+            this.characters.greenBall.startMovement(-1);
+        };
+
+        aObject.release = () => {
+            this.characters.greenBall.stopMovement(-1);
+        };
+
+        let aObject1 = keyboard("A");
+        aObject1.press = () => {
+            this.characters.greenBall.startMovement(-1);
+        };
+
+        aObject1.release = () => {
+            this.characters.greenBall.stopMovement(-1);
         };
 
         let dObject = keyboard("d");
         dObject.press = () => {
-            this.moveBall(1, this.characters.greenBall.body, this.xForce);
+            this.characters.greenBall.startMovement(1);
+        };
+
+        dObject.release = () => {
+            this.characters.greenBall.stopMovement(1);
+        };
+
+        let dObject1 = keyboard("D");
+        dObject1.press = () => {
+            this.characters.greenBall.startMovement(1);
+        };
+
+        dObject1.release = () => {
+            this.characters.greenBall.stopMovement(1);
         };
 
         let wObject = keyboard("w");
         wObject.press = () => {
-            this.moveBall(0, this.characters.greenBall.body, this.yForce);
+            this.characters.greenBall.jump();
+        };
+
+        let wObject1 = keyboard("W");
+        wObject1.press = () => {
+            this.characters.greenBall.jump();
         }
     }
 
