@@ -7,6 +7,7 @@ export class SpriteObject extends GameObject{
         this.sprite = new PIXI.Sprite(tex);
         this.sprite.width = width;
         this.sprite.height = height;
+        this.type = "sprite";
         this.sprite.anchor.set(0.5, 0.5);
     }
 

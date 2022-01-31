@@ -4,6 +4,7 @@ import Matter from "matter-js";
 import {Base} from "./base";
 import {Ledge} from "./ledge";
 import {SpeedBooster} from "./speedBooster";
+import {SizeBooster} from "./sizeBooster";
 import {Ball} from "./ball";
 import {keyboard, findDistance} from "./utils";
 import {Bridge} from "./bridge";
@@ -113,9 +114,11 @@ export class Game extends Base{
         let bridge = new Bridge(100, 300, 300, 200, 20, 10, this);
         bridge.show();
 
-        let speedBooster = new SpeedBooster(500, 70, this);
+        let speedBooster = new SpeedBooster(800, 70, this);
         speedBooster.show();
 
+        let sizeBooster = new SizeBooster(100, 70, this);
+        sizeBooster.show();
     }
 
     initCharacters() {

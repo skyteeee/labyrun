@@ -4,7 +4,14 @@ export class GameObject {
     constructor(physicalBody, game) {
         this.body = physicalBody;
         this.game = game;
+        this.bodyScale = 1;
         this.body.gameObject = this;
+    }
+
+    scaleBody(scale) {
+        let deltaScale = scale / this.bodyScale;
+        this.bodyScale = scale;
+        Matter.Body.scale(this.body, deltaScale, deltaScale);
     }
 
     show() {

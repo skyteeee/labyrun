@@ -9,8 +9,10 @@ export class Ball extends SpriteObject {
         this.moving = 0;
         this.jumps = 2;
         this.movingForce = 0.009;
-        this.pushForce = 0.15;
-        this.yForce = -0.25;
+        this.defaultPushForce = 0.15;
+        this.pushForce = this.defaultPushForce;
+        this.defaultYForce = -0.25;
+        this.yForce = this.defaultYForce;
     }
 
     startMovement(direction) {
@@ -38,6 +40,9 @@ export class Ball extends SpriteObject {
     }
 
     collisionStart(withBody) {
+        if (withBody.gameObject.type && withBody.gameObject.type.startsWith("boost:")) {
+            withBody.gameObject.boost(this);
+        }
         this.resetJumps();
     }
 
