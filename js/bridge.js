@@ -3,36 +3,38 @@ import Matter from "matter-js";
 import {findDistance} from "./utils";
 
 export class Bridge{
-    constructor(x1, y1, x2, y2, pieceHeight, linkAmount, game, angle) {
-        let realCoords1 = game.abstractToReal(x1, y1);
-        let realCoords2 = game.abstractToReal(x2, y2);
-        let pieceWidth =  findDistance(realCoords1.x, realCoords1.y, realCoords2.x, realCoords2.y) / linkAmount + 5;
+    constructor(x1, y1, x2, y2, pieceHeight, linkAmount, game) {
+        let rateOfChange = (y2 - y1) / (x2 - x1);
+        let pieceWidth =  findDistance(x1, y1, x2, y2) / linkAmount / 0.9;
+        let constraintLength = 2;
         this.game = game;
         this.bodies = [];
         this.group = Matter.Body.nextGroup(true);
 
-        this.compound = Matter.Composites.stack(realCoords1.x, realCoords1.y, linkAmount, 1, 0, 0, (x, y) => {
+        this.compound = Matter.Composites.stack(x1, y1, linkAmount, 1, 0, 0, (x, y) => {
             let link = new BridgePiece(x, y, pieceWidth, pieceHeight, this.group, game);
             this.bodies.push(link.body);
             return link.body;
         });
 
-        Matter.Composites.chain(this.compound, 0.3, 0, -0.3, 0, {stiffness: 0.5, length: 0} );
+        Matter.Composites.chain(this.compound, 0.45, 0, -0.45, 0, {stiffness: 0.5, length: 0} );
+
+        let myX = (constraintLength / Math.sqrt(rateOfChange**2 + 1));
 
         this.constraint1 = Matter.Constraint.create({
-            pointA: {x: realCoords1.x - (pieceWidth / 2), y: realCoords1.y},
+            pointA: {x: x1 - myX, y: y1 - myX * rateOfChange},
             bodyB: this.bodies[0],
             pointB: {x: -(pieceWidth / 2), y: 0},
-            length: 2,
-            stiffness: 0.9,
+            length: constraintLength,
+            stiffness: 0.5,
         });
 
         this.constraint2 = Matter.Constraint.create({
-            pointA: {x: x2 + (pieceWidth / 2), y: y2},
+            pointA: {x: x2 + myX, y: y2 + myX * rateOfChange},
             bodyB: this.bodies[this.bodies.length-1],
             pointB: {x: pieceWidth / 2, y: 0},
-            length: 2,
-            stiffness: 0.9,
+            length: constraintLength,
+            stiffness: 0.5,
         });
 
     }

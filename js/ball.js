@@ -12,6 +12,7 @@ export class Ball extends SpriteObject {
         this.defaultPushForce = 0.15;
         this.pushForce = this.defaultPushForce;
         this.defaultYForce = -0.25;
+        this.isBoosted = false;
         this.yForce = this.defaultYForce;
     }
 

@@ -8,7 +8,6 @@ export class Base {
         this.app = null;
         this.height = 0;
         this.width = 0;
-        this.windowDiagonal = 0;
         this.cnt = {};
         this.tex = null;
         this.animatedObjects = [];
@@ -19,6 +18,7 @@ export class Base {
     refresh(time) {
         this.updatePhysics(time);
         this.animate(time);
+        this.decideAndSpawnBooster(time);
         this.updateViewport();
         if (this.decideToRefresh()) {
             requestAnimationFrame((time1) => {this.refresh(time1)});
@@ -34,6 +34,10 @@ export class Base {
             timePassed = time - this.lastTime;
         }
         Matter.Engine.update(this.phEngine, delta, delta/timePassed);
+    }
+
+    decideAndSpawnBooster() {
+
     }
 
     animate(time) {
@@ -111,8 +115,6 @@ export class Base {
             worldHeight: 600
         });
 
-        this.windowDiagonal = findDistance(0, 0, this.width, this.height);
-
         this.viewport.decelerate({friction:0.95});
         this.viewport.clamp({direction: "all"});
 
@@ -133,6 +135,7 @@ export class Base {
             .add('fonts/mainfont2.xml')
             .load(() => {
                 this.setupResources();
+                this.refresh(performance.now());
             });
     }
 

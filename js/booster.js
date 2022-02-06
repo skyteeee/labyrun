@@ -5,10 +5,13 @@ export class Booster extends SpriteObject{
     constructor(width, height, sprite, body, game) {
         super(width, height, sprite, body, game);
         this.type = "boost:";
+        this.consumed = false;
     }
 
     boost(ball) {
+        ball.isBoosted = true;
         this.die();
+        this.consumed = true;
     }
 
     die() {

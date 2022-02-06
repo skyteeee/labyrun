@@ -9,15 +9,18 @@ export class SpeedBooster extends Booster{
     }
 
     boost(ball) {
-        ball.pushForce = ball.defaultPushForce * 2;
-        ball.yForce = ball.defaultYForce * 1.75;
-        ball.sprite.filters = [new pixiFilters.GlowFilter({color: 0xFF7363})];
-        setTimeout(() => {
-            ball.pushForce = ball.defaultPushForce;
-            ball.yForce = ball.defaultYForce;
-            ball.sprite.filters = [];
-        }, 10000);
-        super.boost(ball);
+        if (!this.consumed && !ball.isBoosted) {
+            super.boost(ball);
+            ball.pushForce = ball.defaultPushForce * 2;
+            ball.yForce = ball.defaultYForce * 1.75;
+            ball.sprite.filters = [new pixiFilters.GlowFilter({color: 0xFF7363})];
+            setTimeout(() => {
+                ball.pushForce = ball.defaultPushForce;
+                ball.yForce = ball.defaultYForce;
+                ball.sprite.filters = [];
+                ball.isBoosted = false;
+            }, 10000);
+        }
     }
 
 }

@@ -5,7 +5,6 @@ import css from '../css/game.css'
 
 function init () {
     game.init();
-    game.refresh(performance.now());
 }
 
 function onResize() {

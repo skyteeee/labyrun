@@ -16,6 +16,9 @@ export class Game extends Base{
         this.lastScale = 1;
         this.scaleAnimationObject = {value: 1};
         this.currentScaleAnimation = null;
+        this.boosterTypes = ["boost:speed", "boost:size"];
+        this.boosters = [];
+        this.boosterSpawnTime = 0;
         this.characters = {
             blueBall: null,
             greenBall: null
@@ -63,6 +66,39 @@ export class Game extends Base{
 
         }
     }
+
+    decideAndSpawnBooster(time) {
+        if (this.boosterSpawnTime <= time) {
+            this.spawnBooster();
+            this.boosterSpawnTime = time + this.getBoosterInterval();
+        }
+    }
+
+    spawnBooster () {
+        let maxI = this.boosterTypes.length - 1;
+        let index = Math.round(Math.random()*maxI);
+        let x = Math.round(Math.random() * this.viewport.worldWidth-200)+100;
+        let y = 60;
+        let boosterType = this.boosterTypes[index];
+        let booster = this.createBooster(boosterType, x, y);
+        booster.show();
+        this.boosters.push(booster);
+    }
+
+    getBoosterInterval() {
+        return Math.round(Math.random() * 20000)+10000
+    }
+
+    createBooster(type, x, y) {
+        switch (type) {
+            case "boost:speed":
+                return new SpeedBooster(x, y, this);
+            case "boost:size":
+                return new SizeBooster(x, y, this);
+        }
+    }
+
+
 
     startZoomUpdate(from, to) {
         if (this.currentScaleAnimation) {
@@ -114,11 +150,11 @@ export class Game extends Base{
         let bridge = new Bridge(100, 300, 300, 200, 20, 10, this);
         bridge.show();
 
-        let speedBooster = new SpeedBooster(800, 70, this);
-        speedBooster.show();
-
-        let sizeBooster = new SizeBooster(100, 70, this);
-        sizeBooster.show();
+        // let speedBooster = new SpeedBooster(800, 70, this);
+        // speedBooster.show();
+        //
+        // let sizeBooster = new SizeBooster(100, 70, this);
+        // sizeBooster.show();
     }
 
     initCharacters() {
